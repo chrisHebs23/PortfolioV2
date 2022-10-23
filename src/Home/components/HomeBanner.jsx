@@ -8,7 +8,7 @@ import WaveImage from "./WaveImage";
 
 const HomeBanner = () => {
   return (
-    <div className="bg-gradient-to-br from-black via-gray-900 to-gray-700 h-full mb-lg  ">
+    <div className="bg-gradient-to-br from-black via-gray-900 to-gray-700 max-h-full ">
       <div
         className=" h-full mb-lg bg-opacity-10  "
         style={{ backgroundImage: `url(${vaulknut})` }}

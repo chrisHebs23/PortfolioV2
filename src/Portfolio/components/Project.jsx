@@ -8,7 +8,7 @@ import ProjectContext from "../../context/ProjectContext";
 const Project = () => {
   const { projects, getProjects, loading } = useContext(ProjectContext);
   const [project, setProject] = useState([]);
-  const [isloading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [projId, setProjId] = useState();
   const load = useRef(true);
   const { id } = useParams();
@@ -43,7 +43,7 @@ const Project = () => {
 
   return (
     <>
-      {loading && "loading"}
+      {isLoading || (loading && "loading")}
       <div className="mx-xsm md:mx-md mt-md relative z-0">
         <h2 className="font-title  font-bold text-subHeaderM md:text-subHeader mb-sm md:w-[75%] ">
           {project.title}

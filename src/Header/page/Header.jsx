@@ -75,7 +75,7 @@ const Header = () => {
             className={`${
               open
                 ? "animate-slideIn md:animate-none"
-                : "  md:animate-slideOut md:animate-none"
+                : " animate-slideOut md:animate-none"
             } ${display} p-sm flex-col fixed right-0 top-[60px] z-30 w-[50%] h-[200px] bg-gray-400  justify-between  md:static md:flex md:flex-row md:bg-transparent md:w-auto md:h-hire  md:z-auto md:justify-end md:items-center `}
           >
             {links.map((link) => (

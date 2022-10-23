@@ -34,8 +34,8 @@ const Login = () => {
         .then((response) => {
           auth.login(response.data.userId, response.data.token);
         })
-        .catch((error) => {
-          console.log(error);
+        .catch((err) => {
+          setErrorMessage(err);
         });
     }
   };

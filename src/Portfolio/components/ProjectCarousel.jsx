@@ -1,6 +1,5 @@
-import React, { useContext, useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import ProjectContext from "../../context/ProjectContext";
 import ProjectCards from "./ProjectCards";
 
 const ProjectCarousel = ({ projects, loading }) => {

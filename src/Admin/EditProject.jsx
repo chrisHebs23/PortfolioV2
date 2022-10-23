@@ -18,6 +18,9 @@ const EditProject = () => {
       .get(`${process.env.REACT_APP_BACKEND_URL}/project/` + id)
       .then((response) => {
         setFormData(response.data.project);
+      })
+      .catch((err) => {
+        setErrorMessage(err);
       });
     setLoading(false);
   };
@@ -26,7 +29,7 @@ const EditProject = () => {
     if (!formData) {
       findProject(id);
     }
-  }, []);
+  }, [formData, id]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

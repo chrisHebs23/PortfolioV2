@@ -7,33 +7,33 @@ const ProjectDisplay = () => {
   const [projectData, setProjectData] = useState([]);
   const load = useRef(true);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const filterThree = () => {
     setProjectData(projects.filter((i, index) => index < 3));
   };
 
   useEffect(() => {
     if (load && projects) {
-      console.log(projects);
       filterThree();
       load.current = false;
     }
-  }, [projects]);
+  }, [filterThree, projects]);
 
   return (
     <div className="mb-md">
       {projectData.map((i, index) => (
         <div
           key={index}
-          className={`grid grid-cols-3 grid-rows-3  gap-4 grid-flow-row my-xlg`}
+          className={`grid grid-cols-3 grid-rows-3  gap-4 grid-flow-row my-xlg `}
         >
           <div
-            className={`w-full col-span-3 md:col-span-2 row-span-2 md:row-span-3 bg-[length:900px_500px] md:bg-cover bg-no-repeat rounded-small border-[3px] border-blue bg-left drop-shadow-poster`}
+            className={`w-full col-span-3 md:col-span-2 row-span-2 md:row-span-3 bg-[length:900px_500px] md:bg-cover bg-no-repeat rounded-small border-[3px] border-blue bg-left drop-shadow-poster min-h-[360px] max-h-[850px] hover:`}
             style={{ backgroundImage: `url(${i.imageUrl})` }}
           ></div>
           <div
             className={`md:row-start-2 ${
               index % 2 !== 0 ? "md:col-start-1" : "md:col-start-3"
-            } col-span-2 md:col-span-1 w-auto flex flex-col justify-center w-full `}
+            } col-span-3 md:col-span-1 w-auto flex flex-col justify-center w-full `}
           >
             <h3 className="font-header text-projectTitle font-bold mb-sm">
               {i.title}
