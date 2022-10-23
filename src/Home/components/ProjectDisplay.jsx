@@ -24,10 +24,10 @@ const ProjectDisplay = () => {
       {projectData.map((i, index) => (
         <div
           key={index}
-          className={`grid grid-cols-3 grid-rows-3  gap-4 grid-flow-row my-xlg `}
+          className={`grid grid-cols-3 grid-rows-3  gap-4 grid-flow-row my-lg `}
         >
           <div
-            className={`w-full col-span-3 md:col-span-2 row-span-2 md:row-span-3 bg-[length:900px_500px] md:bg-cover bg-no-repeat rounded-small border-[3px] border-blue bg-left drop-shadow-poster min-h-[360px] max-h-[850px] hover:`}
+            className={`w-full col-span-3 md:col-span-2 row-span-2 md:row-span-3  bg-[length:200%_auto]  md:bg-cover bg-no-repeat rounded-small border-[3px] border-blue bg-left drop-shadow-poster min-h-[360px] max-h-[850px] hover:`}
             style={{ backgroundImage: `url(${i.imageUrl})` }}
           ></div>
           <div
