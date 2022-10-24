@@ -1,62 +1,80 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import axios from "axios";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import ProjectContext from "../../context/ProjectContext";
 
 const ProjectDisplay = () => {
-  const { projects } = useContext(ProjectContext);
+  const [isLoading, setIsLoading] = useState(false);
   const [projectData, setProjectData] = useState([]);
   const load = useRef(true);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const filterThree = () => {
-    setProjectData(projects.filter((i, index) => index < 3));
+  const filterThree = async () => {
+    setIsLoading(true);
+    await axios({
+      method: "get",
+      url: `${process.env.REACT_APP_BACKEND_URL}/project/`,
+    })
+      .then((response) => {
+        setProjectData(response.data.projects.filter((i, index) => index < 3));
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsLoading(false);
+      });
   };
 
   useEffect(() => {
-    if (load && projects) {
+    if (load.current) {
       filterThree();
       load.current = false;
     }
-  }, [filterThree, projects]);
+  }, [filterThree]);
 
   return (
     <div className="mb-md">
-      {projectData.map((i, index) => (
-        <div
-          key={index}
-          className={`grid grid-cols-3 grid-rows-3  gap-4 grid-flow-row my-lg `}
-        >
+      {!isLoading && projectData.length > 0 ? (
+        projectData.map((i, index) => (
           <div
-            className={`w-full col-span-3 md:col-span-2 row-span-2 md:row-span-3  bg-[length:200%_auto]  md:bg-cover bg-no-repeat rounded-small border-[3px] border-blue bg-left drop-shadow-poster min-h-[360px] max-h-[850px] hover:`}
-            style={{ backgroundImage: `url(${i.imageUrl})` }}
-          ></div>
-          <div
-            className={`md:row-start-2 ${
-              index % 2 !== 0 ? "md:col-start-1" : "md:col-start-3"
-            } col-span-3 md:col-span-1 w-auto flex flex-col justify-center w-full `}
+            key={index}
+            className={`flex flex-col ${
+              index % 2 !== 0 ? "md:flex-row-reverse " : "md:flex-row"
+            } my-lg `}
           >
-            <h3 className="font-header text-projectTitle font-bold mb-sm">
-              {i.title}
-            </h3>
-            <p className="font-body text-paraM md:text-para  ">
-              {i.description}
-            </p>
-            <div className="flex flex-wrap w-full mt-sm ">
-              <a href={i.link} target="_blank" rel="noreferrer">
-                <button className="bg-black w-auto px-[30px] py-[6px] mr-lg font-body text-paraM md:text-para text-white rounded-tr-medium rounded-bl-medium drop-shadow-button mb-sm flex-shrink">
-                  Visit Site
-                </button>
-              </a>
+            <div
+              className={` md:w-[70%] bg-[length:250%_auto] bg-left-top md:bg-cover bg-no-repeat rounded-small border-[3px] border-blue  drop-shadow-poster min-h-[360px] md:min-h-[500px] hover:scale-105 mb-md`}
+              style={{ backgroundImage: `url(${i.imageUrl})` }}
+            ></div>
+            <div
+              className={`md:w-[30%] md:row-start-2  ${
+                index % 2 !== 0 ? "md:mr-md" : "md:ml-md"
+              } w-auto flex flex-col justify-center w-full `}
+            >
+              <h3 className="font-header text-projectTitle font-bold mb-sm">
+                {i.title}
+              </h3>
+              <p className="font-body text-paraM md:text-para  ">
+                {i.description}
+              </p>
+              <div className="flex flex-wrap w-full mt-sm ">
+                <a href={i.link} target="_blank" rel="noreferrer">
+                  <button className="bg-black w-auto px-[30px] py-[6px] mr-lg font-body text-paraM md:text-para text-white rounded-tr-medium rounded-bl-medium drop-shadow-button mb-sm flex-shrink">
+                    Visit Site
+                  </button>
+                </a>
 
-              <Link to={`/portfolio/${i.id}`} state={{ id: i.id }}>
-                <button className="bg-gray-600 w-auto px-[30px] py-[6px]  font-body text-paraM md:text-para text-white rounded-tr-medium rounded-bl-medium drop-shadow-button">
-                  More Info
-                </button>
-              </Link>
+                <Link to={`/portfolio/${i.id}`} state={{ id: i.id }}>
+                  <button className="bg-gray-600 w-auto px-[30px] py-[6px]  font-body text-paraM md:text-para text-white rounded-tr-medium rounded-bl-medium drop-shadow-button">
+                    More Info
+                  </button>
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))
+      ) : (
+        <h2>loading...</h2>
+      )}
     </div>
   );
 };
