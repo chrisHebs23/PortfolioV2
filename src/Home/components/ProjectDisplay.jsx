@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import LoadingIcon from "../../Shared/components/LoadingIcon";
 
 const ProjectDisplay = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -33,7 +34,8 @@ const ProjectDisplay = () => {
 
   return (
     <div className="mb-md">
-      {!isLoading && projectData.length > 0 ? (
+      {/* && projectData.length > 0 ? */}
+      {!isLoading ? (
         projectData.map((i, index) => (
           <div
             key={index}
@@ -42,7 +44,7 @@ const ProjectDisplay = () => {
             } my-lg `}
           >
             <div
-              className={` md:w-[70%] bg-[length:250%_auto] bg-left-top md:bg-cover bg-no-repeat rounded-small border-[3px] border-blue  drop-shadow-poster min-h-[360px] md:min-h-[500px] hover:scale-105 mb-md`}
+              className={` md:w-[70%] bg-[length:250%_auto] bg-left-top md:bg-cover bg-no-repeat rounded-small border-[3px] border-blue  drop-shadow-poster min-h-[360px] md:min-h-[500px] hover:scale-[1.02] transition ease-in-out delay-75 mb-md`}
               style={{ backgroundImage: `url(${i.imageUrl})` }}
             ></div>
             <div
@@ -56,24 +58,24 @@ const ProjectDisplay = () => {
               <p className="font-body text-paraM md:text-para  ">
                 {i.description}
               </p>
+              <a
+                href={`/portfolio/${i.id}`}
+                className="text-error underline underline-offset-2 hover:text-blue"
+              >
+                Learn more about {i.title}
+              </a>
               <div className="flex flex-wrap w-full mt-sm ">
                 <a href={i.link} target="_blank" rel="noreferrer">
                   <button className="bg-black w-auto px-[30px] py-[6px] mr-lg font-body text-paraM md:text-para text-white rounded-tr-medium rounded-bl-medium drop-shadow-button mb-sm flex-shrink">
                     Visit Site
                   </button>
                 </a>
-
-                <Link to={`/portfolio/${i.id}`} state={{ id: i.id }}>
-                  <button className="bg-gray-600 w-auto px-[30px] py-[6px]  font-body text-paraM md:text-para text-white rounded-tr-medium rounded-bl-medium drop-shadow-button">
-                    More Info
-                  </button>
-                </Link>
               </div>
             </div>
           </div>
         ))
       ) : (
-        <h2>loading...</h2>
+        <LoadingIcon />
       )}
     </div>
   );

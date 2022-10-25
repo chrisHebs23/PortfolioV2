@@ -54,6 +54,7 @@ module.exports = {
         slideOut: "slideOut 0.3s ease-out",
         rotateUp: "rotateUp 0.3s linear",
         rotateDown: "rotateDown 0.3s linear",
+        "spin-slow": "spin 2s linear infinite ",
       },
     },
     fontFamily: {

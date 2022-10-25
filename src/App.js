@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { AdminContext } from "./context/AdminContext";
 import { useAuth } from "./Shared/hooks/authHook";
+import LoadingIcon from "./Shared/components/LoadingIcon";
 
 const Header = React.lazy(() => import("./Header/page/Header"));
 const Home = React.lazy(() => import("./Home/pages/Home"));
@@ -33,7 +34,13 @@ function App() {
       >
         <ProjectProvider>
           <Router>
-            <Suspense fallback={<div>Loading</div>} className="App">
+            <Suspense
+              fallback={
+                <div className="w-full ">
+                  <LoadingIcon height="h-[100vh]" />
+                </div>
+              }
+            >
               {/* Hire me has to be above header so they dont over lap */}
               <HireMe />
               <Header />
