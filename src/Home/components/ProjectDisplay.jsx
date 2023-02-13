@@ -65,10 +65,13 @@ const ProjectDisplay = () => {
                 Learn more about {i.title}
               </a>
               <div className="flex flex-wrap w-full mt-sm ">
-                <a href={i.link} target="_blank" rel="noreferrer">
-                  <button className="bg-black w-auto px-[30px] py-[6px] mr-lg font-body text-paraM md:text-para text-white rounded-tr-medium rounded-bl-medium drop-shadow-button mb-sm flex-shrink">
-                    Visit Site
-                  </button>
+                <a
+                  href={i.websiteUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="bg-black w-auto px-[30px] py-[6px] mr-lg font-body text-paraM md:text-para text-white rounded-tr-medium rounded-bl-medium drop-shadow-button mb-sm flex-shrink cursor-pointer"
+                >
+                  Visit Site
                 </a>
               </div>
             </div>
